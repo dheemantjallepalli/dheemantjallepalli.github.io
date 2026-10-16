@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dheemant Jallepalli</title>
+  <meta name="description" content="Dheemant Jallepalli — Research Fellow at the Harvard Bionics Lab working on neural engineering, sEMG decoding, and human–machine interfaces.">
+  <meta name="theme-color" content="#0b0a0a">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@700;800;900&family=Anybody:wdth,wght@50..150,200..900&family=Schibsted+Grotesk:wght@400..700&family=Martian+Mono:wght@300..500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Scroll progress: a square wave that fills red as you scroll -->
+  <svg class="progress" viewBox="0 0 1200 12" preserveAspectRatio="none" aria-hidden="true">
+    <path id="progress-track" d="" />
+    <path id="progress-fill" d="" />
+  </svg>
+
+  <header class="nav">
+    <a href="#top" class="nav-mark" aria-label="Home">
+      <svg viewBox="30 105 1260 410" aria-hidden="true"><use href="#mark" /></svg>
+      <span class="wordmark">Dheemant Jallepalli</span>
+    </a>
+    <nav>
+      <a href="#top">Home</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About<span class="long"> &amp; Contact</span></a>
+    </nav>
+  </header>
+
+  <!-- The logo, defined once and reused -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="mark" fill="none" stroke-width="44" stroke-linecap="butt" stroke-linejoin="miter">
+        <path class="m1" stroke="#f3eeea" d="M92 470 H790 L845 430 L950 150 H1228" />
+        <path class="m2" stroke="#f3eeea" d="M322 150 H670 L695 190 L590 470" />
+        <path class="tip" fill="#f3eeea" stroke="none" d="M95 448 V492 H48 L92 448 Z M1225 128 H1272 L1228 172 H1225 Z M325 128 V172 H278 L322 128 Z" />
+        <path class="m3" fill="#a8111b" stroke="none" d="M434.75 128 H481.75 L345.25 492 H298.25 Z" />
+      </g>
+    </defs>
+  </svg>
+
+  <main id="top">
+    <section class="hero">
+      <canvas id="signal" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <svg class="hero-mark" viewBox="30 105 1260 410" role="img" aria-label="DJ logo">
+          <g fill="none" stroke-width="44" stroke-linecap="butt" stroke-linejoin="miter">
+            <path class="m1" d="M92 470 H790 L845 430 L950 150 H1228" />
+            <path class="m2" d="M322 150 H670 L695 190 L590 470" />
+            <path class="tip" d="M95 448 V492 H48 L92 448 Z M1225 128 H1272 L1228 172 H1225 Z M325 128 V172 H278 L322 128 Z" />
+            <path class="m3" d="M434.75 128 H481.75 L345.25 492 H298.25 Z" />
+          </g>
+        </svg>
+        <!-- EDIT: your name -->
+        <h1 class="name" data-stretch>Dheemant Jallepalli</h1>
+        <p class="tag mono">neural engineering <span>/</span> human–machine interfaces <span>/</span> neurorehabilitation</p>
+        <p class="hint mono">move your cursor across the signal — click to fire a spike</p>
+      </div>
+      <a class="scroll-cue mono" href="#education">scroll ↓</a>
+    </section>
+
+    <!-- ================= 01 EDUCATION & TRAINING ================= -->
+    <section id="education" class="education">
+      <p class="label mono">01 — education &amp; training</p>
+      <h2>Where I learned</h2>
+      <ol class="timeline">
+        <li class="tl reveal">
+          <span class="tl-when mono">2026 — now</span>
+          <div class="tl-body">
+            <h3>Harvard University · Bionics Lab</h3>
+            <p class="tl-what mono">research fellow · human–machine interface clinical research</p>
+            <p>Developing human–machine interfaces for clinical use, with a focus on understanding and replicating sensorimotor integration, under Prof. Shriya Srinivasan at Harvard SEAS. Affiliate fellow at Mass General Brigham.</p>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">2024 — 2026</span>
+          <div class="tl-body">
+            <h3>Carnegie Mellon University</h3>
+            <p class="tl-what mono">M.S. biomedical engineering (research — neuroengineering) · GPA 3.96</p>
+            <p>Thesis: <em>Gamified Surface Electromyography Neuromotor Interface</em>, with Prof. Doug Weber in the Neuromechatronics Lab. Graduated a semester early, then stayed on as a Research Engineer. Head of the Department Fellowship, CMU-BME Research Excellence Award, and Outstanding Presentation Award at the CMU-BME Forum. TA for Intro to BME and grader for Intro to Neural Engineering.</p>
+            <div class="tl-pics">
+              <img src="assets/thumb/DSC01227.jpg" alt="Graduation day" loading="lazy">
+              <img src="assets/thumb/IMG-20260513-WA0212.jpg" alt="Scaife Hall of Engineering" loading="lazy">
+              <img src="assets/thumb/20251202_120734.jpg" alt="Hamerschlag Hall in the snow" loading="lazy">
+              <img src="assets/thumb/20250813_055415.jpg" alt="EEG session" loading="lazy">
+            </div>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">summer 2024</span>
+          <div class="tl-body">
+            <h3>Mila — Quebec AI Institute</h3>
+            <p class="tl-what mono">research engineer · computational pathology</p>
+            <p>Collaborator on Tissue2Vec with Dr. Samira E. Kahou and Dr. Mahdi Hosseini: multi-instance learning and self-supervised features for whole-slide histopathology images.</p>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">summer 2023</span>
+          <div class="tl-body">
+            <h3>University of Manitoba</h3>
+            <p class="tl-what mono">visiting research scholar · Mitacs Globalink</p>
+            <p>Vision and Mobility Lab with Prof. Veronica Miyasike da Silva — studying how vision shapes walking, using eye trackers and IMUs across ages, terrains and cognitive load.</p>
+            <div class="tl-pics">
+              <img src="assets/thumb/20230808_190619.jpg" alt="University of Manitoba" loading="lazy">
+            </div>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">2020 — 2024</span>
+          <div class="tl-body">
+            <h3>IIT Jodhpur</h3>
+            <p class="tl-what mono">B.Tech. bioengineering · minor in science of intelligence</p>
+            <p>Thesis on functional connectivity in the human subcortex from resting-state fMRI with Prof. Shilpa Dang, later published in <em>Scientific Reports</em> (2025). Also EEG research with Prof. Vignesh Muralidharan, and TA for Introduction to Cognitive Science.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ================= 02 MY PROJECTS ================= -->
+    <section id="projects" class="work">
+      <p class="label mono">02 — my projects</p>
+      <h2>Things I've built</h2>
+      <div class="cards">
+        <article class="card reveal">
+          <span class="card-n mono">01</span>
+          <h3>Gamified sEMG neuromotor interface</h3>
+          <p>Master's thesis: real-time AI decoding of surface EMG for gesture classification and proportional control, turned into games for rehabilitation. Poster at IEEE EMBS Neural Engineering (NER) 2025.</p>
+          <span class="card-tags mono">sEMG · real-time ML · rehab</span>
+        </article>
+        <article class="card reveal">
+          <span class="card-n mono">02</span>
+          <h3>Myoelectric control for a multi-DoF upper limb</h3>
+          <p>Machine-learning myoelectric control across multiple degrees of freedom. Won the Outstanding Presentation Award at the CMU-BME Forum.</p>
+          <span class="card-tags mono">myoelectric control · robotics</span>
+        </article>
+        <article class="card reveal">
+          <span class="card-n mono">03</span>
+          <h3>Microvascular function in sickle cell disease</h3>
+          <p>Cerebral and peripheral blood flow and oxygen extraction measured with diffuse correlation and near-infrared spectroscopy. Poster at ASH 2025.</p>
+          <span class="card-tags mono">DCS · NIRS · hematology</span>
+        </article>
+        <article class="card reveal">
+          <span class="card-n mono">04</span>
+          <h3>Cortico-subcortical networks at rest</h3>
+          <p>Neuroimaging pipeline for subcortical functional connectivity using Human Connectome Project rs-fMRI. Published in <em>Scientific Reports</em>, 2025.</p>
+          <span class="card-tags mono">fMRI · connectivity · publication</span>
+        </article>
+        <article class="card reveal">
+          <span class="card-n mono">05</span>
+          <h3>Tissue2Vec</h3>
+          <p>Multi-instance learning with self-supervised features to classify whole-slide pathology images, evaluated on CAMELYON17 metastasis detection.</p>
+          <span class="card-tags mono">deep learning · pathology</span>
+        </article>
+        <article class="card reveal">
+          <span class="card-n mono">06</span>
+          <h3>Adobe behaviour simulation challenge</h3>
+          <p>Led a team of 6 at Inter IIT Tech Meet 12.0: multimodal models predicting tweet engagement, plus LLaVA-based tweet generation.</p>
+          <span class="card-tags mono">multimodal ML · LLMs · team lead</span>
+        </article>
+      </div>
+
+      <h3 class="sub">In the lab — myoelectric control, mid-test</h3>
+      <div class="clips">
+        <figure class="clip reveal">
+          <video src="assets/video/clip1.mp4" poster="assets/video/clip1.jpg" muted loop playsinline preload="none"></video>
+          <figcaption class="mono">clip_01 · hover / tap to play</figcaption>
+        </figure>
+        <figure class="clip reveal">
+          <video src="assets/video/clip2.mp4" poster="assets/video/clip2.jpg" muted loop playsinline preload="none"></video>
+          <figcaption class="mono">clip_02 · hover / tap to play</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= 03 ABOUT ME & CONTACT ================= -->
+    <section id="about" class="about">
+      <div class="about-photo reveal">
+        <img src="assets/thumb/20251207_162116.jpg" alt="Dheemant presenting his sickle cell disease poster at ASH 2025" loading="lazy">
+      </div>
+      <div class="about-text reveal">
+        <p class="label mono">03 — about me &amp; contact</p>
+        <h2>I decode movement from muscle.</h2>
+        <p>
+          I'm a Research Fellow at the Harvard Bionics Lab, working where neural engineering, wearable biosensing
+          and human–machine interfaces meet. I decode neuromotor intent from surface EMG to drive neuroprosthetics,
+          exoskeletons and interactive rehabilitation, with the goal of restoring motor function after neurological injury.
+        </p>
+        <p>
+          I'm also interested in closed-loop neurorehabilitation, pairing biosignal decoding with neuromodulation and
+          spinal cord stimulation to promote recovery. Away from the bench: football (I captained my school team),
+          middle-distance running, and too many photos of light installations.
+        </p>
+        <ul class="facts mono">
+          <li><span>now</span> Research Fellow, Harvard Bionics Lab</li>
+          <li><span>before</span> M.S. BME, Carnegie Mellon · B.Tech., IIT Jodhpur</li>
+          <li><span>into</span> sEMG decoding · neuroprosthetics · neurorehab · BCI</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+      <h3 class="sub">Along the way</h3>
+      <div class="filters mono" role="toolbar" aria-label="Filter photos">
+        <button class="on" data-filter="all">all</button>
+        <button data-filter="research">research</button>
+        <button data-filter="milestones">milestones</button>
+        <button data-filter="people">people</button>
+        <button data-filter="places">places</button>
+        <button data-filter="light">light</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2 data-stretch>Say hello.</h2>
+      <!-- EDIT: put in your real links -->
+      <div class="links mono">
+        <a href="mailto:dheemant_jallepalli@seas.harvard.edu">email</a>
+        <a href="https://github.com/djleo10">github</a>
+        <a href="https://www.linkedin.com/in/dheemantjallepalli">linkedin</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mono">
+    <svg viewBox="30 105 1260 410" aria-hidden="true"><use href="#mark" /></svg>
+    <span>© <span id="year"></span> Dheemant Jallepalli</span>
+  </footer>
+
+  <dialog id="lightbox">
+    <button class="lb-close mono" aria-label="Close">close ✕</button>
+    <button class="lb-prev" aria-label="Previous photo">‹</button>
+    <img alt="">
+    <button class="lb-next" aria-label="Next photo">›</button>
+    <p class="lb-cap mono"></p>
+  </dialog>
+
+  <script src="main.js"></script>
+</body>
+</html>
