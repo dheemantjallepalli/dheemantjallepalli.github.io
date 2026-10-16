@@ -70,21 +70,35 @@ document.getElementById("year").textContent = new Date().getFullYear();
   update();
 })();
 
-// ---------- Live "neural signal" behind the hero ----------
+// ---------- Smeared red dots drifting behind the hero ----------
 (() => {
   const canvas = document.getElementById("signal");
   const ctx = canvas.getContext("2d");
   const hero = canvas.parentElement;
-  const LINES = 5;
-  let W, H, dpr, t = 0;
+  let W, H, dpr, dots = [];
   const mouse = { x: -9999, y: -9999 };
-  const spikes = []; // {x, born}
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  const make = (x, y, burst) => {
+    const ang = burst ? rand(0, Math.PI * 2) : rand(-0.6, 0.6) + (Math.random() < 0.5 ? 0 : Math.PI);
+    const sp = burst ? rand(1.5, 4) : rand(0.08, 0.35);
+    return {
+      x: x ?? rand(0, W), y: y ?? rand(0, H),
+      vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp * 0.6,
+      r: burst ? rand(4, 14) : rand(8, 46),
+      a: burst ? rand(0.35, 0.6) : rand(0.06, 0.28),
+      smear: rand(1.6, 3.4),
+      life: burst ? 1 : Infinity,
+    };
+  };
 
   const resize = () => {
     dpr = Math.min(devicePixelRatio || 1, 2);
     W = hero.clientWidth; H = hero.clientHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(46, (W * H) / 26000));
+    dots = Array.from({ length: n }, () => make());
   };
   resize();
   addEventListener("resize", resize);
@@ -96,48 +110,53 @@ document.getElementById("year").textContent = new Date().getFullYear();
   hero.addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
   hero.addEventListener("click", (e) => {
     const r = hero.getBoundingClientRect();
-    spikes.push({ x: e.clientX - r.left, born: t });
+    for (let i = 0; i < 10; i++) dots.push(make(e.clientX - r.left, e.clientY - r.top, true));
   });
 
-  // cheap smooth noise
-  const noise = (x, s) => Math.sin(x * 0.021 + s) * 0.5 + Math.sin(x * 0.053 + s * 1.7) * 0.3 + Math.sin(x * 0.11 + s * 2.3) * 0.2;
+  const drawDot = (d) => {
+    const alpha = d.a * Math.min(1, d.life);
+    if (alpha <= 0.002) return;
+    ctx.save();
+    ctx.translate(d.x, d.y);
+    ctx.rotate(Math.atan2(d.vy, d.vx));
+    ctx.scale(d.smear, 1);
+    const g = ctx.createRadialGradient(0, 0, 0, 0, 0, d.r);
+    g.addColorStop(0, `rgba(190, 20, 30, ${alpha})`);
+    g.addColorStop(0.45, `rgba(168, 17, 27, ${alpha * 0.55})`);
+    g.addColorStop(1, "rgba(168, 17, 27, 0)");
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(0, 0, d.r, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  };
 
-  const draw = () => {
+  const step = () => {
     ctx.clearRect(0, 0, W, H);
-    for (let l = 0; l < LINES; l++) {
-      const baseY = H * (0.18 + l * 0.16);
-      const seed = l * 13.7;
-      ctx.beginPath();
-      for (let x = 0; x <= W; x += 3) {
-        let y = noise(x + t * (40 + l * 8), seed + t * 0.6) * 10;
-        // cursor proximity boosts amplitude
-        const dx = x - mouse.x, dy = baseY - mouse.y;
-        const near = Math.exp(-(dx * dx) / 9000 - (dy * dy) / 6000);
-        y += near * Math.sin(x * 0.25 + t * 12) * 34;
-        // click spikes travel outward
-        for (const s of spikes) {
-          const age = t - s.born;
-          const front = Math.abs(x - s.x) - age * 520;
-          y += Math.exp(-(front * front) / 60) * -70 * Math.exp(-age * 1.4) * (l % 2 ? -1 : 1);
-        }
-        x === 0 ? ctx.moveTo(x, baseY + y) : ctx.lineTo(x, baseY + y);
+    ctx.globalCompositeOperation = "lighter";
+    for (const d of dots) {
+      // drift away from the cursor
+      const dx = d.x - mouse.x, dy = d.y - mouse.y, dist2 = dx * dx + dy * dy;
+      if (dist2 < 160 * 160) {
+        const f = (1 - Math.sqrt(dist2) / 160) * 0.06;
+        d.vx += dx * f / 40; d.vy += dy * f / 40;
       }
-      const hot = l === 2;
-      ctx.strokeStyle = hot ? "rgba(190,20,30,.7)" : "rgba(168,17,27,.25)";
-      ctx.lineWidth = hot ? 1.6 : 1;
-      ctx.stroke();
+      d.vx *= d.life === Infinity ? 0.985 : 0.96;
+      d.vy *= d.life === Infinity ? 0.985 : 0.96;
+      // keep ambient dots gently moving
+      if (d.life === Infinity && Math.hypot(d.vx, d.vy) < 0.08) { d.vx += rand(-0.03, 0.03); d.vy += rand(-0.02, 0.02); }
+      d.x += d.vx; d.y += d.vy;
+      if (d.life !== Infinity) d.life -= 0.012;
+      if (d.x < -80) d.x = W + 80; if (d.x > W + 80) d.x = -80;
+      if (d.y < -80) d.y = H + 80; if (d.y > H + 80) d.y = -80;
+      drawDot(d);
     }
-    while (spikes.length && t - spikes[0].born > 3) spikes.shift();
+    ctx.globalCompositeOperation = "source-over";
+    dots = dots.filter((d) => d.life > 0);
   };
 
-  if (reduceMotion) { draw(); return; }
-  let last = performance.now(), visible = true;
+  if (reduceMotion) { step(); return; }
+  let visible = true;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(hero);
-  const loop = (now) => {
-    t += Math.min((now - last) / 1000, 0.05); last = now;
-    if (visible) draw();
-    requestAnimationFrame(loop);
-  };
+  const loop = () => { if (visible) step(); requestAnimationFrame(loop); };
   requestAnimationFrame(loop);
 })();
 
