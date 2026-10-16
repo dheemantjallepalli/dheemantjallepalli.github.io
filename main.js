@@ -156,7 +156,7 @@ document.querySelectorAll("[data-stretch]").forEach((el) => {
       const d = Math.abs(e.clientX - (r.left + r.width / 2));
       const k = Math.max(0, 1 - d / 200);
       c.style.transform = `translateY(${-k * 0.08}em) scaleY(${1 + k * 0.12})`;
-      c.style.color = k > 0.75 ? "var(--red)" : "";
+      c.style.color = k > 0.75 ? (c.closest(".w:last-child") && el.classList.contains("name") ? "var(--text)" : "var(--red)") : "";
     }
   });
   el.addEventListener("pointerleave", () => chars.forEach((c) => { c.style.transform = ""; c.style.color = ""; }));

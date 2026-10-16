@@ -116,6 +116,7 @@ img, video { display: block; max-width: 100%; }
 }
 @keyframes divider { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 .hero-id .name { text-align: left; }
+.name .w:last-child { color: var(--red-ink); }
 .hero-mark g { filter: drop-shadow(0 0 18px rgba(168, 17, 27, .45)); }
 .name {
   font-family: var(--display);
