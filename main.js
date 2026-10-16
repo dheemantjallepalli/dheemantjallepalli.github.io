@@ -31,6 +31,20 @@ const canHover = matchMedia("(hover: hover)").matches;
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// ---------- Logo: replay the draw + flash every time you land on the hero ----------
+(() => {
+  const mark = document.querySelector(".hero-mark");
+  if (!mark || reduceMotion) return;
+  const play = () => {
+    mark.classList.remove("play");
+    void mark.getBoundingClientRect(); // restart CSS animations
+    mark.classList.add("play");
+  };
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) play(); }, { threshold: 0.6 }).observe(mark);
+  mark.addEventListener("pointerenter", play);
+  mark.addEventListener("click", play);
+})();
+
 // ---------- Square-wave scroll progress ----------
 (() => {
   const track = document.getElementById("progress-track");
