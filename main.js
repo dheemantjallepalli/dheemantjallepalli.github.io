@@ -242,7 +242,7 @@ document.querySelectorAll(".clip").forEach((fig) => {
 })();
 
 // timeline thumbnails open in the lightbox too
-document.querySelectorAll(".tl-pics img").forEach((im) => {
+document.querySelectorAll(".tl-pics img, .ph img").forEach((im) => {
   im.addEventListener("click", () => {
     const file = im.src.split("/").pop().replace(".jpg", "");
     const i = PHOTOS.findIndex(([f]) => f === file);
