@@ -193,6 +193,18 @@ h2 {
 .edu-facts dt { color: var(--muted); padding-top: 2px; }
 .edu-facts dd { margin: 0; color: #cfc6c2; }
 
+/* institution logos */
+.org { display: flex; align-items: center; gap: 14px; margin: 0 0 8px; }
+.org h3 { margin: 0 !important; }
+.edu-card .org { margin: 14px 0 6px; }
+.org-logo {
+  width: 48px; height: 48px; flex: none; object-fit: contain;
+  background: #fff; padding: 4px; border-radius: 6px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.tl:hover .org-logo, .edu-card:hover .org-logo { box-shadow: 0 0 0 2px var(--red); }
+@media (max-width: 760px) { .org-logo { width: 40px; height: 40px; } }
+
 /* research bullets */
 .tl-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; max-width: 70ch; }
 .tl-list li { position: relative; padding-left: 18px; color: #bdb3af; font-size: .95rem; line-height: 1.55; }
