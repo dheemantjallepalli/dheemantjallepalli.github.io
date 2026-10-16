@@ -25,7 +25,7 @@
   --red-deep: #5e070c;
   --display: "Robot Heroes", "Tomorrow", sans-serif;
   --body: "Schibsted Grotesk", system-ui, sans-serif;
-  --mono: "Martian Mono", ui-monospace, monospace;
+  --mono: "Chakra Petch", "Schibsted Grotesk", sans-serif;
   --gutter: clamp(16px, 5vw, 64px);
 }
 
@@ -44,7 +44,7 @@ body {
 ::selection { background: var(--red); color: var(--bg); }
 a { color: inherit; }
 img, video { display: block; max-width: 100%; }
-.mono { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em; }
+.mono { font-family: var(--mono); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.03em; }
 
 /* ---------- logo strokes ---------- */
 .hero-mark .m1, .hero-mark .m2 { stroke: var(--text); }
@@ -148,7 +148,7 @@ h2 {
   background: var(--bg); border: 1px solid var(--muted); rotate: 45deg; transition: all .3s; z-index: 1;
 }
 .tl:hover::before, .tl.lit::before { background: var(--red); border-color: var(--red); }
-.tl-when { color: var(--muted); padding-top: 3px; text-transform: uppercase; }
+.tl-when { color: var(--muted); padding-top: 3px; }
 .tl h3 {
   font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 95;
   text-transform: uppercase; font-size: clamp(1.2rem, 2.4vw, 1.7rem); line-height: 1.05; margin: 0 0 8px;
