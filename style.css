@@ -21,7 +21,7 @@
   --text: #f3eeea;
   --muted: #9a8f8b;
   --red: #a8111b;
-  --red-ink: #c81e26; /* slightly lifted red for small text so it stays readable */
+  --red-ink: var(--red); /* one red everywhere */
   --red-deep: #5e070c;
   --display: "Robot Heroes", "Tomorrow", sans-serif;
   --body: "Schibsted Grotesk", system-ui, sans-serif;
