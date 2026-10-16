@@ -2,7 +2,7 @@
 // categories: research, milestones, people, places, light
 const PHOTOS = [
   ["1000012867", "research", "Society for Neuroscience"],
-  ["20250813_055415", "research", "EEG Session"],
+  ["20250813_055415", "research", "EEG Session, IIT Jodhpur"],
   ["20251114_092226", "research", "Poster Session"],
   ["20251206_113449", "research", "American Society of Hematology"],
   ["20251207_150904", "research", "ASH — Main Hall"],
