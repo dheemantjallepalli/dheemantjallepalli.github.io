@@ -45,19 +45,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
   mark.addEventListener("click", play);
 })();
 
-// ---------- Hero icons drift a little with the cursor ----------
-(() => {
-  const layer = document.querySelector(".hero-icons");
-  if (!layer || reduceMotion || !canHover) return;
-  const hero = layer.parentElement;
-  hero.addEventListener("pointermove", (e) => {
-    const r = hero.getBoundingClientRect();
-    layer.style.setProperty("--px", ((e.clientX - r.left) / r.width - 0.5) * -24);
-    layer.style.setProperty("--py", ((e.clientY - r.top) / r.height - 0.5) * -24);
-  });
-  hero.addEventListener("pointerleave", () => { layer.style.setProperty("--px", 0); layer.style.setProperty("--py", 0); });
-})();
-
 // ---------- Square-wave scroll progress ----------
 (() => {
   const track = document.getElementById("progress-track");
