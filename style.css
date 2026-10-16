@@ -325,6 +325,24 @@ section.about {
 .tile:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 .tile.hide { display: none; }
 
+/* running personal bests */
+#pbs { padding-bottom: 20px; }
+.pb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.pb {
+  position: relative; border: 1px solid var(--line); padding: 26px 24px 22px; overflow: hidden;
+  display: flex; flex-direction: column; gap: 6px; transition: border-color .3s;
+}
+.pb::before {
+  content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 0; background: var(--red);
+  transition: width 1.6s cubic-bezier(.2,.7,.2,1) .2s;
+}
+.pb.in::before { width: 100%; }
+.pb:hover { border-color: var(--red); }
+.pb-dist { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 1.1rem; color: var(--muted); }
+.pb-time { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 600; color: var(--text); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.pb-pace { color: var(--red); }
+@media (max-width: 760px) { .pb-grid { grid-template-columns: 1fr; } }
+
 /* contact */
 .contact { text-align: center; }
 .contact h2 { font-size: clamp(3rem, 14vw, 11rem); margin-bottom: 40px; }

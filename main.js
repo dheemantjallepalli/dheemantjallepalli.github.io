@@ -250,6 +250,27 @@ document.querySelectorAll(".tl-pics img, .ph img").forEach((im) => {
   });
 });
 
+// ---------- Personal bests count up when they scroll into view ----------
+(() => {
+  const fmt = (s) => [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60].map((n) => String(n).padStart(2, "0")).join(":");
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      obs.unobserve(e.target);
+      const el = e.target.querySelector(".pb-time"), total = +e.target.dataset.time;
+      if (reduceMotion) return;
+      const start = performance.now(), dur = 1400;
+      const tick = (now) => {
+        const k = Math.min(1, (now - start) / dur), eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = fmt(Math.round(total * eased));
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll(".pb[data-time]").forEach((pb) => obs.observe(pb));
+})();
+
 // ---------- Reveal on scroll ----------
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
