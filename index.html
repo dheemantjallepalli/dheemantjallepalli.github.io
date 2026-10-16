@@ -13,11 +13,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Scroll progress: a square wave that fills red as you scroll -->
-  <svg class="progress" viewBox="0 0 1200 12" preserveAspectRatio="none" aria-hidden="true">
-    <path id="progress-track" d="" />
-    <path id="progress-fill" d="" />
-  </svg>
+  <!-- Scroll progress: a flowing EMG signal that turns red as you scroll -->
+  <canvas class="progress" id="progress" aria-hidden="true"></canvas>
 
   <header class="nav">
     <a href="#top" class="nav-mark" aria-label="Home">

@@ -45,29 +45,48 @@ document.getElementById("year").textContent = new Date().getFullYear();
   mark.addEventListener("click", play);
 })();
 
-// ---------- Square-wave scroll progress ----------
+// ---------- Scroll progress: a flowing EMG stream, red where you've scrolled ----------
 (() => {
-  const track = document.getElementById("progress-track");
-  const fill = document.getElementById("progress-fill");
-  const periods = 24, w = 1200 / periods;
-  let d = "M0 10";
-  for (let i = 0; i < periods; i++) {
-    const x = i * w;
-    d += ` H${x + w * 0.25} V2 H${x + w * 0.75} V10`;
-  }
-  d += " H1200";
-  track.setAttribute("d", d);
-  fill.setAttribute("d", d);
-  const len = fill.getTotalLength();
-  fill.style.strokeDasharray = len;
-  const update = () => {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    const p = max > 0 ? scrollY / max : 0;
-    fill.style.strokeDashoffset = len * (1 - p);
+  const c = document.getElementById("progress");
+  const ctx = c.getContext("2d");
+  let W, H, dpr, t = 0, p = 0;
+  // deterministic noise so the signal looks like real EMG rather than flicker
+  const hash = (i) => { const v = Math.sin(i * 127.1) * 43758.5453; return v - Math.floor(v); };
+  const envelope = (i) => Math.max(0, Math.sin(i * 0.013)) ** 3 + 0.6 * Math.max(0, Math.sin(i * 0.031 + 2)) ** 4;
+  const emg = (i) => (hash(i) * 2 - 1) * (0.08 + envelope(i));
+
+  const resize = () => {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = c.clientWidth; H = c.clientHeight;
+    c.width = W * dpr; c.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
-  addEventListener("scroll", update, { passive: true });
-  addEventListener("resize", update);
-  update();
+  const progress = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    p = max > 0 ? Math.min(1, scrollY / max) : 0;
+  };
+  const trace = (from, to, color, width) => {
+    ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = width;
+    const mid = H / 2;
+    for (let x = Math.floor(from); x <= to; x++) {
+      const y = mid - emg(Math.floor(x + t)) * H * 0.44;
+      x === Math.floor(from) ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  };
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    const cut = W * p;
+    trace(cut, W, "rgba(243,238,234,.2)", 1);
+    if (cut > 1) trace(0, cut, "#a8111b", 1.4);
+  };
+
+  resize(); progress();
+  addEventListener("resize", () => { resize(); progress(); draw(); });
+  addEventListener("scroll", () => { progress(); if (reduceMotion) draw(); }, { passive: true });
+  if (reduceMotion) { draw(); return; }
+  const loop = () => { t += 1.2; draw(); requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
 })();
 
 // ---------- Letters stretch toward the cursor (variable font width) ----------
