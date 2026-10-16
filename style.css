@@ -151,7 +151,7 @@ h2 {
   content: ""; position: absolute; left: 6px; top: 6px; width: 1px; height: var(--fill, 0%);
   background: var(--red); box-shadow: 0 0 10px var(--red); max-height: calc(100% - 12px);
 }
-.tl { position: relative; display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 0 0 56px; }
+.tl { position: relative; display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 0 0 56px; }
 .tl::before {
   content: ""; position: absolute; left: -27px; top: 4px; width: 11px; height: 11px;
   background: var(--bg); border: 1px solid var(--muted); rotate: 45deg; transition: all .3s; z-index: 1;
@@ -179,6 +179,24 @@ h2 {
 #about { padding-bottom: 60px; }
 #gallery { padding-top: 40px; }
 #contact { padding-top: 60px; }
+
+/* education cards */
+.edu { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 16px; }
+.edu-card { border: 1px solid var(--line); padding: 28px 26px; position: relative; transition: border-color .3s; }
+.edu-card::before { content: ""; position: absolute; left: -1px; top: -1px; width: 48px; height: 3px; background: var(--red); transition: width .5s cubic-bezier(.7,0,.2,1); }
+.edu-card:hover { border-color: #3a2c2c; }
+.edu-card:hover::before { width: calc(100% + 2px); }
+.edu-top { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); }
+.edu-card h3 { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.3rem, 2.4vw, 1.8rem); line-height: 1.05; margin: 14px 0 6px; }
+.edu-degree { color: var(--red-ink); font-family: var(--mono); font-weight: 500; margin: 0 0 18px; }
+.edu-facts { display: grid; grid-template-columns: 64px 1fr; gap: 8px 14px; margin: 0; font-size: .95rem; }
+.edu-facts dt { color: var(--muted); padding-top: 2px; }
+.edu-facts dd { margin: 0; color: #cfc6c2; }
+
+/* research bullets */
+.tl-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; max-width: 70ch; }
+.tl-list li { position: relative; padding-left: 18px; color: #bdb3af; font-size: .95rem; line-height: 1.55; }
+.tl-list li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 2px; background: var(--red); }
 
 /* about */
 .about { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); align-items: center; }

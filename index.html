@@ -27,6 +27,7 @@
     <nav>
       <a href="#top">Home</a>
       <a href="#education">Education</a>
+      <a href="#research">Research</a>
       <a href="#projects">Projects</a>
       <a href="#about">About<span class="long"> &amp; Contact</span></a>
     </nav>
@@ -64,72 +65,162 @@
       <a class="scroll-cue mono" href="#education">Scroll ↓</a>
     </section>
 
-    <!-- ================= 01 EDUCATION & TRAINING ================= -->
+    <!-- ================= 01 EDUCATION ================= -->
     <section id="education" class="education">
-      <p class="label mono">01 — Education &amp; Training</p>
-      <h2>Where I learned</h2>
-      <ol class="timeline">
-        <li class="tl reveal">
-          <span class="tl-when mono">2026 — Now</span>
-          <div class="tl-body">
-            <h3>Harvard University · Bionics Lab</h3>
-            <p class="tl-what mono">Research Fellow · Human–Machine Interface Clinical Research</p>
-            <p>Developing human–machine interfaces for clinical use, with a focus on understanding and replicating sensorimotor integration, under Prof. Shriya Srinivasan at Harvard SEAS. Affiliate fellow at Mass General Brigham.</p>
-          </div>
-        </li>
-        <li class="tl reveal">
-          <span class="tl-when mono">2024 — 2026</span>
-          <div class="tl-body">
-            <h3>Carnegie Mellon University</h3>
-            <p class="tl-what mono">M.S. Biomedical Engineering (Research — Neuroengineering) · GPA 3.96</p>
-            <p>Thesis: <em>Gamified Surface Electromyography Neuromotor Interface</em>, with Prof. Doug Weber in the Neuromechatronics Lab. Graduated a semester early, then stayed on as a Research Engineer. Head of the Department Fellowship, CMU-BME Research Excellence Award, and Outstanding Presentation Award at the CMU-BME Forum. TA for Intro to BME and grader for Intro to Neural Engineering.</p>
-            <div class="tl-pics">
+      <p class="label mono">01 — Education</p>
+      <h2>Where I Studied</h2>
+      <div class="edu">
+        <article class="edu-card reveal">
+          <div class="edu-top mono"><span>2024 — 2025</span><span>Pittsburgh, PA</span></div>
+          <h3>Carnegie Mellon University</h3>
+          <p class="edu-degree">M.S. in Biomedical Engineering (Research)</p>
+          <dl class="edu-facts">
+            <dt class="mono">GPA</dt><dd>3.96 / 4.00</dd>
+            <dt class="mono">Lab</dt><dd>NeuroMechatronics Lab, Prof. Douglas J. Weber</dd>
+            <dt class="mono">Thesis</dt><dd>Gamified Surface Electromyography Neuromotor Interface</dd>
+            <dt class="mono">Awards</dt><dd>Department Head's Fellowship · BME Research Excellence Award · Outstanding Presentation Award</dd>
+          </dl>
+          <div class="tl-pics">
               <img src="assets/thumb/DSC01227.jpg" alt="Graduation day" loading="lazy">
               <img src="assets/thumb/IMG-20260513-WA0212.jpg" alt="Scaife Hall of Engineering" loading="lazy">
               <img src="assets/thumb/20251202_120734.jpg" alt="Hamerschlag Hall in the snow" loading="lazy">
+          </div>
+        </article>
+        <article class="edu-card reveal">
+          <div class="edu-top mono"><span>2020 — 2024</span><span>Jodhpur, India</span></div>
+          <h3>Indian Institute of Technology Jodhpur</h3>
+          <p class="edu-degree">B.Tech. in Bioengineering · Minor in Science of Intelligence</p>
+          <dl class="edu-facts">
+            <dt class="mono">GPA</dt><dd>7.87 / 10.00</dd>
+            <dt class="mono">Lab</dt><dd>Network &amp; Cognitive Neuroscience Lab, Prof. Shilpa Dang</dd>
+            <dt class="mono">Thesis</dt><dd>Assessing the Functional Connective Networks in the Subcortical Area from Human RS-fMRI Data</dd>
+            <dt class="mono">Awards</dt><dd>Chanakya Undergraduate Fellowship · Mitacs Globalink · Amazon ML Summer School (×2)</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 02 RESEARCH EXPERIENCE ================= -->
+    <section id="research" class="research">
+      <p class="label mono">02 — Research Experience</p>
+      <h2>Where I've Worked</h2>
+      <ol class="timeline">
+        <li class="tl reveal">
+          <span class="tl-when mono">Mar 2026 — Now</span>
+          <div class="tl-body">
+            <h3>Harvard University · Bionics Lab</h3>
+            <p class="tl-what mono">Research Fellow · Prof. Shriya S. Srinivasan · Cambridge, MA</p>
+            <ul class="tl-list">
+              <li>Ran a multi-day surface EMG biofeedback study showing people can learn to fire two synergistic plantar-flexor muscles independently — turning one degree of freedom into multi-DOF control</li>
+              <li>Built a portable multi-channel sEMG system (custom analog front-end, filtering, embedded firmware) now used as the at-home platform for a study in lower-limb amputation</li>
+              <li>Engineered a handheld myoelectric controller that emulates a keyboard, giving up to 4 degrees of freedom in unmodified commercial games</li>
+              <li>Built closed-loop functional electrical stimulation driven by muscle-state-aware deep learning controllers, benchmarked against PID on force tracking and fatigue</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">Aug 2024 — Mar 2026</span>
+          <div class="tl-body">
+            <h3>Carnegie Mellon University · NeuroMechatronics Lab</h3>
+            <p class="tl-what mono">Research Engineer · Prof. Douglas J. Weber · Pittsburgh, PA</p>
+            <ul class="tl-list">
+              <li>Decoded 8-channel surface EMG into continuous wrist and finger movement for real-time games (up to 92% gesture accuracy) and drove a custom 3D-printed multi-DOF robotic arm</li>
+              <li>Showed proportional velocity control beats position-based and discrete gesture decoding for natural game control — the basis of my MS thesis</li>
+              <li>Built a Python framework tracking motor recovery under spinal cord stimulation in stroke, using electrodermal and heart-rate-variability biomarkers</li>
+              <li>Built a closed-loop stimulation interface on CorTec’s implantable device API, and HD-EMG motor unit decomposition tools</li>
+            </ul>
+            <div class="tl-pics">
               <img src="assets/thumb/20250813_055415.jpg" alt="EEG session" loading="lazy">
+              <img src="assets/thumb/20251212_231536.jpg" alt="Lab desk" loading="lazy">
             </div>
           </div>
         </li>
         <li class="tl reveal">
-          <span class="tl-when mono">Summer 2024</span>
+          <span class="tl-when mono">Jan 2025 — Dec 2025</span>
           <div class="tl-body">
-            <h3>Mila — Quebec AI Institute</h3>
-            <p class="tl-what mono">Research Engineer · Computational Pathology</p>
-            <p>Collaborator on Tissue2Vec with Dr. Samira E. Kahou and Dr. Mahdi Hosseini: multi-instance learning and self-supervised features for whole-slide histopathology images.</p>
+            <h3>Carnegie Mellon University · Wood Lab</h3>
+            <p class="tl-what mono">Research Assistant · Prof. Sossena Wood · Pittsburgh, PA</p>
+            <ul class="tl-list">
+              <li>Measured cerebral and forearm blood flow in adults with sickle cell disease, a population prior pediatric studies left out</li>
+              <li>Extracted pulsatile hemodynamic features and modelled their link to hematocrit and disease status; characterized oxygen extraction and cerebral metabolism</li>
+              <li>Presented at the 67th American Society of Hematology Annual Meeting (ASH 2025)</li>
+            </ul>
+            <div class="tl-pics">
+              <img src="assets/thumb/20251207_162116.jpg" alt="Presenting at ASH 2025" loading="lazy">
+              <img src="assets/thumb/20251207_150904.jpg" alt="ASH main hall" loading="lazy">
+            </div>
           </div>
         </li>
         <li class="tl reveal">
-          <span class="tl-when mono">Summer 2023</span>
+          <span class="tl-when mono">Jan 2025 — May 2025</span>
           <div class="tl-body">
-            <h3>University of Manitoba</h3>
-            <p class="tl-what mono">Visiting Research Scholar · Mitacs Globalink</p>
-            <p>Vision and Mobility Lab with Prof. Veronica Miyasike da Silva — studying how vision shapes walking, using eye trackers and IMUs across ages, terrains and cognitive load.</p>
+            <h3>Carnegie Mellon University · Brain–Computer Interfaces</h3>
+            <p class="tl-what mono">Course Project · Prof. Bin He · Pittsburgh, PA</p>
+            <ul class="tl-list">
+              <li>Built a 64-channel EEG motor-imagery BCI pipeline (CSP/FBCSP, MIBIF feature selection) and compared LDA, SVM and random forests against EEGNet</li>
+              <li>Offline spatial filtering and deep models consistently beat the original online linear classifier</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">May 2025 — Aug 2025</span>
+          <div class="tl-body">
+            <h3>CMU Center for Technology Transfer</h3>
+            <p class="tl-what mono">Technology Transfer Intern · Pittsburgh, PA</p>
+            <ul class="tl-list">
+              <li>Wrote technology assessments for CMU inventions: prior art, competitive landscape, unmet need, market and licensees</li>
+              <li>Supported invention disclosures, patentability assessments and licensing strategy</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">May 2024 — Aug 2024</span>
+          <div class="tl-body">
+            <h3>Mila — Québec AI Institute</h3>
+            <p class="tl-what mono">Research Collaborator · Prof. Samira Ebrahimi Kahou · Montréal</p>
+            <ul class="tl-list">
+              <li>Designed mask-guided patch sampling with the Segment Anything Model to pick diagnostically relevant regions in whole-slide pathology images</li>
+              <li>Halved patch sampling and memory on CAMELYON17 without losing accuracy, reaching slide-level AUC 0.97 (+4% over baseline)</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">Aug 2023 — Dec 2023</span>
+          <div class="tl-body">
+            <h3>IIT Jodhpur · Network &amp; Cognitive Neuroscience Lab</h3>
+            <p class="tl-what mono">Undergraduate Researcher · Prof. Shilpa Dang · Jodhpur</p>
+            <ul class="tl-list">
+              <li>Mapped functional communities across the thalamus, basal ganglia and limbic regions from resting-state fMRI</li>
+              <li>Built the analysis pipeline (QC, Louvain and K-means clustering, graph theory) — published in <em>Scientific Reports</em>, 2025</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl-when mono">May 2023 — Aug 2023</span>
+          <div class="tl-body">
+            <h3>University of Manitoba · Vision &amp; Mobility Lab</h3>
+            <p class="tl-what mono">Mitacs Globalink Research Intern · Prof. Veronica Silva · Winnipeg</p>
+            <ul class="tl-list">
+              <li>Studied how distracted walking narrows the functional field of view across age groups, using whole-body kinematics, eye tracking and dual-task costs</li>
+              <li>Investigated age-related reliance on vision when adapting gait to changing terrain</li>
+            </ul>
             <div class="tl-pics">
               <img src="assets/thumb/20230808_190619.jpg" alt="University of Manitoba" loading="lazy">
             </div>
           </div>
         </li>
-        <li class="tl reveal">
-          <span class="tl-when mono">2020 — 2024</span>
-          <div class="tl-body">
-            <h3>IIT Jodhpur</h3>
-            <p class="tl-what mono">B.Tech. Bioengineering · Minor in Science of Intelligence</p>
-            <p>Thesis on functional connectivity in the human subcortex from resting-state fMRI with Prof. Shilpa Dang, later published in <em>Scientific Reports</em> (2025). Also EEG research with Prof. Vignesh Muralidharan, and TA for Introduction to Cognitive Science.</p>
-          </div>
-        </li>
       </ol>
     </section>
 
-    <!-- ================= 02 MY PROJECTS ================= -->
+    <!-- ================= 03 MY PROJECTS ================= -->
     <section id="projects" class="work">
-      <p class="label mono">02 — My Projects</p>
+      <p class="label mono">03 — My Projects</p>
       <h2>Things I've built</h2>
       <div class="cards">
         <article class="card reveal">
           <span class="card-n mono">01</span>
           <h3>Gamified sEMG neuromotor interface</h3>
-          <p>Master's thesis: real-time AI decoding of surface EMG for gesture classification and proportional control, turned into games for rehabilitation. Poster at IEEE EMBS Neural Engineering (NER) 2025.</p>
+          <p>Master's thesis: 8-channel surface EMG decoded in real time into continuous wrist and finger control for games (up to 92% accuracy). Poster at IEEE EMBS Neural Engineering 2025.</p>
           <span class="card-tags mono">sEMG · Real-Time ML · Rehab</span>
         </article>
         <article class="card reveal">
@@ -152,8 +243,8 @@
         </article>
         <article class="card reveal">
           <span class="card-n mono">05</span>
-          <h3>Tissue2Vec</h3>
-          <p>Multi-instance learning with self-supervised features to classify whole-slide pathology images, evaluated on CAMELYON17 metastasis detection.</p>
+          <h3>Adaptive sampling for pathology</h3>
+          <p>Segment-Anything-guided patch sampling for whole-slide images: half the patches and memory, slide-level AUC 0.97 on CAMELYON17.</p>
           <span class="card-tags mono">Deep Learning · Pathology</span>
         </article>
         <article class="card reveal">
@@ -177,13 +268,13 @@
       </div>
     </section>
 
-    <!-- ================= 03 ABOUT ME & CONTACT ================= -->
+    <!-- ================= 04 ABOUT ME & CONTACT ================= -->
     <section id="about" class="about">
       <div class="about-photo reveal">
         <img src="assets/thumb/20251207_162116.jpg" alt="Dheemant presenting his sickle cell disease poster at ASH 2025" loading="lazy">
       </div>
       <div class="about-text reveal">
-        <p class="label mono">03 — About Me &amp; Contact</p>
+        <p class="label mono">04 — About Me &amp; Contact</p>
         <h2>I decode movement from muscle.</h2>
         <p>
           I'm a Research Fellow at the Harvard Bionics Lab, working where neural engineering, wearable biosensing
@@ -223,6 +314,7 @@
         <a href="mailto:dheemant_jallepalli@seas.harvard.edu">Email</a>
         <a href="https://github.com/djleo10">GitHub</a>
         <a href="https://www.linkedin.com/in/dheemantjallepalli">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=X6n9XuAAAAAJ">Google Scholar</a>
       </div>
     </section>
   </main>
