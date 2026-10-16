@@ -65,11 +65,34 @@ document.getElementById("year").textContent = new Date().getFullYear();
     const max = document.documentElement.scrollHeight - innerHeight;
     p = max > 0 ? Math.min(1, scrollY / max) : 0;
   };
+  // live reading: amplitude follows how much text is on screen right now
+  const textEls = [...document.querySelectorAll("h1, h2, h3, p, li, dt, dd, figcaption, .links a, .filters button")]
+    .filter((el) => !el.querySelector("p, li, h2, h3"))
+    .map((el) => ({ el, n: el.textContent.trim().length }));
+  let amp = 0.3, target = 0.3;
+  const measure = () => {
+    let chars = 0;
+    for (const { el, n } of textEls) {
+      if (!n) continue;
+      const r = el.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= innerHeight || !r.height) continue;
+      const vis = (Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height;
+      chars += n * vis;
+    }
+    // ~1400 characters fills a typical screen with text
+    target = Math.min(1, Math.max(0.08, chars / (1400 * (innerWidth * innerHeight) / (1280 * 800))));
+  };
+  let measureQueued = false;
+  const queueMeasure = () => {
+    if (measureQueued) return;
+    measureQueued = true;
+    requestAnimationFrame(() => { measureQueued = false; measure(); });
+  };
   const trace = (from, to, color, width) => {
     ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = width;
-    const mid = H / 2;
+    const mid = H / 2, gain = H * 0.46 * (0.15 + 0.85 * amp);
     for (let x = Math.floor(from); x <= to; x++) {
-      const y = mid - emg(Math.floor(x + t)) * H * 0.44;
+      const y = mid - emg(Math.floor(x + t)) * gain;
       x === Math.floor(from) ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
     ctx.stroke();
@@ -81,11 +104,16 @@ document.getElementById("year").textContent = new Date().getFullYear();
     if (cut > 1) trace(0, cut, "#a8111b", 1.4);
   };
 
-  resize(); progress();
-  addEventListener("resize", () => { resize(); progress(); draw(); });
-  addEventListener("scroll", () => { progress(); if (reduceMotion) draw(); }, { passive: true });
+  resize(); progress(); measure(); amp = target;
+  addEventListener("resize", () => { resize(); progress(); measure(); draw(); });
+  addEventListener("scroll", () => { progress(); queueMeasure(); if (reduceMotion) { amp = target; draw(); } }, { passive: true });
   if (reduceMotion) { draw(); return; }
-  const loop = () => { t += 1.2; draw(); requestAnimationFrame(loop); };
+  setInterval(measure, 1000); // catches reveal animations and lazy images settling
+  const loop = () => {
+    amp += (target - amp) * 0.06;
+    t += 0.8 + amp * 0.8; // busier screens also fire a little faster
+    draw(); requestAnimationFrame(loop);
+  };
   requestAnimationFrame(loop);
 })();
 
