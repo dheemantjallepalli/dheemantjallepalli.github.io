@@ -162,7 +162,9 @@ LIFE.forEach(([file, cat, cap, type]) => {
   fig.dataset.cap = cap;
   fig.tabIndex = 0;
   const thumb = isVid ? `assets/video/${file}.jpg` : `assets/thumb/${file}.jpg`;
-  fig.innerHTML = `<img src="${thumb}" alt="${cap}" loading="lazy">${isVid ? '<span class="play-badge" aria-hidden="true">▶</span>' : ""}<figcaption>${cap}</figcaption>`;
+  fig.innerHTML = (isVid
+    ? `<video src="assets/video/${file}.mp4" poster="${thumb}" muted loop playsinline preload="none" aria-label="${cap}"></video>`
+    : `<img src="${thumb}" alt="${cap}" loading="lazy">`) + `<figcaption>${cap}</figcaption>`;
   grid.appendChild(fig);
 
   if (canHover && !reduceMotion) {
@@ -233,14 +235,16 @@ document.querySelectorAll(".filters button").forEach((btn) => {
   });
 })();
 
-// ---------- Project cards with a video preview play on hover ----------
-document.querySelectorAll(".card-media video").forEach((v) => {
-  const card = v.closest(".card");
-  if (canHover && !reduceMotion) {
-    card.addEventListener("pointerenter", () => v.play().catch(() => {}));
-    card.addEventListener("pointerleave", () => v.pause());
-  }
-});
+// ---------- Videos play by themselves while they're on screen ----------
+(() => {
+  const vids = [...document.querySelectorAll(".tl-pics video, .card-media video, #grid video")];
+  if (reduceMotion) return;
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    const v = e.target;
+    if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+  }), { threshold: 0.35 });
+  vids.forEach((v) => io.observe(v));
+})();
 
 // ---------- Education timeline: line fills as you scroll ----------
 (() => {
