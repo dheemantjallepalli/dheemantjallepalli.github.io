@@ -442,3 +442,7 @@ footer svg { width: 54px; height: 19px; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; translate: 0 0; }
 }
+
+/* videos turn to full colour while they're playing on screen */
+.tl-pics .m video, .card-media video, .tile video { transition: filter .8s ease, transform .6s; }
+.tl-pics .m video.on-screen, .card-media video.on-screen, .tile video.on-screen { filter: none !important; }
