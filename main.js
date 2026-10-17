@@ -274,6 +274,51 @@ document.querySelectorAll(".card-media video").forEach((v) => {
   document.querySelectorAll(".pb[data-time]").forEach((pb) => obs.observe(pb));
 })();
 
+// ---------- About: stacked photo deck that deals itself ----------
+(() => {
+  const deck = document.querySelector(".deck");
+  if (!deck) return;
+  const cards = [...deck.querySelectorAll(".deck-card")];
+  const cap = document.querySelector(".deck-cap");
+  const tilt = [-2, 4, -5, 6, -3, 3, -6];
+  let order = cards.map((_, i) => i), busy = false;
+  const lay = () => {
+    order.forEach((ci, pos) => {
+      const c = cards[ci];
+      c.style.zIndex = cards.length - pos;
+      c.style.opacity = pos < 4 ? 1 : 0;
+      c.style.transform = `translate(${pos * 8}px, ${pos * -7}px) rotate(${tilt[pos % tilt.length]}deg)`;
+    });
+    cap.textContent = cards[order[0]].dataset.cap;
+  };
+  const next = () => {
+    if (busy) return;
+    busy = true;
+    const top = cards[order[0]];
+    top.style.transform = "translate(-115%, 14px) rotate(-18deg)";
+    top.style.opacity = 0;
+    cap.style.opacity = 0;
+    setTimeout(() => { order.push(order.shift()); lay(); cap.style.opacity = 1; busy = false; }, 520);
+  };
+  lay();
+  deck.addEventListener("click", (e) => {
+    if (e.target.closest(".deck-more") && order[0] === cards.length - 1) return; // let the link work
+    e.preventDefault();
+    next();
+  });
+  deck.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    if (order[0] === cards.length - 1) location.hash = "#life"; else next();
+  });
+  if (reduceMotion) return;
+  let paused = false, visible = false;
+  deck.addEventListener("pointerenter", () => { paused = true; });
+  deck.addEventListener("pointerleave", () => { paused = false; });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(deck);
+  setInterval(() => { if (!paused && visible && !document.hidden) next(); }, 3400);
+})();
+
 // ---------- Reveal on scroll ----------
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
