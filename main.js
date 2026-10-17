@@ -289,7 +289,7 @@ document.querySelectorAll(".card-media video").forEach((v) => {
       c.style.opacity = pos < 4 ? 1 : 0;
       c.style.transform = `translate(${pos * 8}px, ${pos * -7}px) rotate(${tilt[pos % tilt.length]}deg)`;
     });
-    cap.textContent = cards[order[0]].dataset.cap;
+    if (cap) cap.textContent = cards[order[0]].dataset.cap;
   };
   const next = () => {
     if (busy) return;
@@ -297,8 +297,7 @@ document.querySelectorAll(".card-media video").forEach((v) => {
     const top = cards[order[0]];
     top.style.transform = "translate(-115%, 14px) rotate(-18deg)";
     top.style.opacity = 0;
-    cap.style.opacity = 0;
-    setTimeout(() => { order.push(order.shift()); lay(); cap.style.opacity = 1; busy = false; }, 520);
+    setTimeout(() => { order.push(order.shift()); lay(); busy = false; }, 520);
   };
   lay();
   deck.addEventListener("click", (e) => {
