@@ -1,29 +1,37 @@
-// ---------- Photos: edit captions / categories here ----------
-// categories: research, milestones, people, places, light
-const PHOTOS = [
-  ["1000012867", "research", "Society for Neuroscience"],
-  ["20250813_055415", "research", "EEG Session, IIT Jodhpur"],
-  ["20251114_092226", "research", "Poster Session"],
-  ["20251206_113449", "research", "American Society of Hematology"],
-  ["20251207_150904", "research", "ASH — Main Hall"],
-  ["20251207_162116", "research", "Presenting at ASH 2025"],
-  ["20251212_231536", "research", "The Desk"],
-  ["20230808_190619", "milestones", "University of Manitoba — Mitacs Globalink, 2023"],
-  ["20251202_120734", "milestones", "Hamerschlag in the Snow"],
-  ["DSC01227", "milestones", "Graduation Day"],
-  ["IMG-20260513-WA0212", "milestones", "Scaife Hall of Engineering"],
-  ["20260309_185939", "people", "Long Table, Good Company"],
-  ["IMG_20250929_174344_645", "people", "Pirates Game with the Crew"],
-  ["IMG_4939", "people", "Group Trip"],
-  ["20230703_142113", "places", "CN Tower, Toronto"],
-  ["20251214_002847", "places", "First Snowman of the Year"],
-  ["20251229_163145", "places", "Gold"],
-  ["VideoCapture_20240519-091331", "places", "Strike"],
-  ["PXL_20261003_195538788", "light", "Blue Room"],
-  ["PXL_20261003_200957400.LONG_EXPOSURE-02.ORIGINAL", "light", "Coral"],
-  ["PXL_20261003_201116451.LONG_EXPOSURE-01.COVER", "light", "Long Exposure I"],
-  ["PXL_20261003_201116451.LONG_EXPOSURE-02.ORIGINAL", "light", "Long Exposure II"],
-  ["PXL_20261003_203425467", "light", "Light Box"],
+// ---------- Life outside the lab: edit captions / categories here ----------
+// [file, category, caption, type]  type "video" files live in assets/video, photos in assets/img + assets/thumb
+const LIFE = [
+  ["img-20240511-wa0067", "football", "Night training squad"],
+  ["football-1", "football", "Team photo under the lights", "video"],
+  ["img-20240501-wa0123", "football", "Match-day squad"],
+  ["img-20240502-wa0061", "football", "On the ball"],
+  ["img-20260719-wa0042", "football", "Barça kit day"],
+  ["20240107_203820", "football", "Boots under the floodlights"],
+  ["img-20240511-wa0073", "football", "After the game"],
+  ["img-20240412-wa0049", "football", "Team pool night"],
+  ["20250511_164928", "lego", "Technic Porsche build"],
+  ["20251229_173625", "lego", "Formula 1 car"],
+  ["20241018_215950", "lego", "Fresh build, library break"],
+  ["20260530_221810", "lego", "Lucky cat & bonsai"],
+  ["20260222_105840", "hobbies", "Bouldering"],
+  ["img_5739", "hobbies", "Surfing"],
+  ["img_7083", "hobbies", "Hiking the falls"],
+  ["img_7654", "hobbies", "Trail day"],
+  ["img-20240908-wa0242", "hobbies", "Countryside drive"],
+  ["img-20250307-wa0045", "hobbies", "Pizza night"],
+  ["20230703_142113", "travel", "CN Tower, Toronto"],
+  ["img-20250308-wa0081", "travel", "New York at night"],
+  ["img-20250906-wa0272", "travel", "On the river, Pittsburgh"],
+  ["20260606_143803", "travel", "Packed and moving"],
+  ["20260309_185939", "friends", "Long table, good company"],
+  ["img_20250929_174344_645", "friends", "Pirates game with the crew"],
+  ["img-20260103-wa0040", "friends", "Snow day"],
+  ["img_4939", "friends", "Group trip"],
+  ["me-wa-1", "me", "Fall colours"],
+  ["me-wa-2", "me", "Under the flag"],
+  ["img-20260315-wa0013", "me", "Night walk"],
+  ["pxl_20261003_195538788", "me", "Blue room"],
+  ["pxl_20261003_203425467", "me", "Light box"],
 ];
 
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -138,24 +146,27 @@ document.querySelectorAll("[data-stretch]").forEach((el) => {
   el.addEventListener("pointerleave", () => chars.forEach((c) => { c.style.transform = ""; c.style.color = ""; }));
 });
 
-// ---------- Gallery ----------
+// ---------- Life gallery ----------
 const grid = document.getElementById("grid");
-PHOTOS.forEach(([file, cat, cap], i) => {
+LIFE.forEach(([file, cat, cap, type]) => {
+  const isVid = type === "video";
   const fig = document.createElement("figure");
-  fig.className = "tile reveal";
+  fig.className = "tile reveal" + (isVid ? " tile-vid" : "");
   fig.dataset.cat = cat;
-  fig.dataset.i = i;
+  fig.dataset.lb = "";
+  fig.dataset.type = isVid ? "video" : "img";
+  fig.dataset.full = isVid ? `assets/video/${file}.mp4` : `assets/img/${file}.jpg`;
+  fig.dataset.cap = cap;
   fig.tabIndex = 0;
-  fig.innerHTML = `<img src="assets/thumb/${file}.jpg" alt="${cap}" loading="lazy"><figcaption>${cap}</figcaption>`;
+  const thumb = isVid ? `assets/video/${file}.jpg` : `assets/thumb/${file}.jpg`;
+  fig.innerHTML = `<img src="${thumb}" alt="${cap}" loading="lazy">${isVid ? '<span class="play" aria-hidden="true">▶</span>' : ""}<figcaption>${cap}</figcaption>`;
   grid.appendChild(fig);
 
   if (canHover && !reduceMotion) {
     fig.addEventListener("pointermove", (e) => {
       const r = fig.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      fig.style.setProperty("--ry", `${px * 8}deg`);
-      fig.style.setProperty("--rx", `${-py * 8}deg`);
+      fig.style.setProperty("--ry", `${((e.clientX - r.left) / r.width - 0.5) * 8}deg`);
+      fig.style.setProperty("--rx", `${-((e.clientY - r.top) / r.height - 0.5) * 8}deg`);
     });
     fig.addEventListener("pointerleave", () => { fig.style.removeProperty("--rx"); fig.style.removeProperty("--ry"); });
   }
@@ -170,61 +181,62 @@ document.querySelectorAll(".filters button").forEach((btn) => {
   });
 });
 
-// ---------- Lightbox ----------
+// ---------- Lightbox: any [data-lb] item opens it; arrows move within its [data-lb-group] ----------
 (() => {
   const lb = document.getElementById("lightbox");
-  const img = lb.querySelector("img");
+  const img = lb.querySelector(".lb-media img");
+  const vid = lb.querySelector(".lb-media video");
   const cap = lb.querySelector(".lb-cap");
-  let cur = 0;
-  const visibleIdx = () => [...grid.querySelectorAll(".tile:not(.hide)")].map((t) => +t.dataset.i);
+  let items = [], cur = 0;
   const show = (i) => {
-    cur = i;
-    const [file, , c] = PHOTOS[i];
-    img.src = `assets/img/${file}.jpg`;
-    img.alt = c;
-    cap.textContent = c;
+    cur = (i + items.length) % items.length;
+    const it = items[cur], isVid = it.dataset.type === "video";
+    vid.pause();
+    img.hidden = isVid; vid.hidden = !isVid;
+    if (isVid) { vid.src = it.dataset.full; vid.play().catch(() => {}); }
+    else { vid.removeAttribute("src"); img.src = it.dataset.full; img.alt = it.dataset.cap; }
+    cap.textContent = it.dataset.cap;
   };
-  const step = (dir) => {
-    const v = visibleIdx();
-    show(v[(v.indexOf(cur) + dir + v.length) % v.length]);
+  const open = (el) => {
+    const group = el.closest("[data-lb-group]") || el.parentElement;
+    items = [...group.querySelectorAll("[data-lb]")].filter((x) => !x.classList.contains("hide"));
+    show(items.indexOf(el));
+    lb.showModal();
   };
-  grid.addEventListener("click", (e) => {
-    const t = e.target.closest(".tile");
-    if (t) { show(+t.dataset.i); lb.showModal(); }
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-lb]");
+    if (el && !lb.contains(el)) open(el);
   });
-  grid.addEventListener("keydown", (e) => {
-    const t = e.target.closest(".tile");
-    if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); show(+t.dataset.i); lb.showModal(); }
+  document.addEventListener("keydown", (e) => {
+    const el = e.target.closest && e.target.closest("[data-lb]");
+    if (el && el.tagName !== "BUTTON" && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); open(el); }
   });
+  lb.addEventListener("close", () => { vid.pause(); vid.removeAttribute("src"); vid.load(); });
   lb.querySelector(".lb-close").onclick = () => lb.close();
-  lb.querySelector(".lb-prev").onclick = () => step(-1);
-  lb.querySelector(".lb-next").onclick = () => step(1);
+  lb.querySelector(".lb-prev").onclick = () => show(cur - 1);
+  lb.querySelector(".lb-next").onclick = () => show(cur + 1);
   lb.addEventListener("click", (e) => { if (e.target === lb) lb.close(); });
   lb.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") step(-1);
-    if (e.key === "ArrowRight") step(1);
+    if (e.key === "ArrowLeft") show(cur - 1);
+    if (e.key === "ArrowRight") show(cur + 1);
   });
-  // swipe on phones
   let sx = null;
   lb.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
   lb.addEventListener("touchend", (e) => {
     if (sx === null) return;
     const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+    if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
     sx = null;
   });
 })();
 
-// ---------- Lab videos: hover (desktop) or tap to play ----------
-document.querySelectorAll(".clip").forEach((fig) => {
-  const v = fig.querySelector("video");
-  const play = () => { v.play().catch(() => {}); fig.classList.add("playing"); };
-  const pause = () => { v.pause(); fig.classList.remove("playing"); };
-  if (canHover) {
-    fig.addEventListener("pointerenter", play);
-    fig.addEventListener("pointerleave", pause);
+// ---------- Project cards with a video preview play on hover ----------
+document.querySelectorAll(".card-media video").forEach((v) => {
+  const card = v.closest(".card");
+  if (canHover && !reduceMotion) {
+    card.addEventListener("pointerenter", () => v.play().catch(() => {}));
+    card.addEventListener("pointerleave", () => v.pause());
   }
-  v.addEventListener("click", () => (v.paused ? play() : pause()));
 });
 
 // ---------- Education timeline: line fills as you scroll ----------
@@ -240,15 +252,6 @@ document.querySelectorAll(".clip").forEach((fig) => {
   addEventListener("scroll", update, { passive: true });
   update();
 })();
-
-// timeline thumbnails open in the lightbox too
-document.querySelectorAll(".tl-pics img, .ph img").forEach((im) => {
-  im.addEventListener("click", () => {
-    const file = im.src.split("/").pop().replace(".jpg", "");
-    const i = PHOTOS.findIndex(([f]) => f === file);
-    if (i >= 0) grid.querySelector(`.tile[data-i="${i}"]`).click();
-  });
-});
 
 // ---------- Personal bests count up when they scroll into view ----------
 (() => {
