@@ -159,7 +159,7 @@ LIFE.forEach(([file, cat, cap, type]) => {
   fig.dataset.cap = cap;
   fig.tabIndex = 0;
   const thumb = isVid ? `assets/video/${file}.jpg` : `assets/thumb/${file}.jpg`;
-  fig.innerHTML = `<img src="${thumb}" alt="${cap}" loading="lazy">${isVid ? '<span class="play" aria-hidden="true">▶</span>' : ""}<figcaption>${cap}</figcaption>`;
+  fig.innerHTML = `<img src="${thumb}" alt="${cap}" loading="lazy">${isVid ? '<span class="play-badge" aria-hidden="true">▶</span>' : ""}<figcaption>${cap}</figcaption>`;
   grid.appendChild(fig);
 
   if (canHover && !reduceMotion) {

@@ -105,7 +105,7 @@ img, video { display: block; max-width: 100%; }
 @media (max-width: 760px) { .hero::before { background-image: url("assets/hero-bg-small.jpg"); background-size: 230% auto; background-position: 21% 100%; -webkit-mask-image: linear-gradient(to bottom, transparent 42%, #000 66%, #000 96%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 42%, #000 66%, #000 96%, transparent 100%); } }
 .hero-inner { position: relative; text-align: center; pointer-events: none; }
 .hero-id { display: flex; align-items: center; justify-content: center; gap: clamp(16px, 3vw, 44px); }
-.hero-mark { width: min(300px, 27vw); flex: none; margin: 0; overflow: visible; }
+.hero-mark { width: min(280px, 24vw); flex: none; margin: 0; overflow: visible; }
 .hero-divider {
   align-self: stretch; width: 2px; flex: none; background: var(--text); opacity: .85;
   transform-origin: 50% 50%; animation: divider .6s cubic-bezier(.7,0,.2,1) .2s both;
@@ -119,7 +119,7 @@ img, video { display: block; max-width: 100%; }
   font-family: var(--display);
   font-weight: 900;
   font-variation-settings: "wdth" 100;
-  font-size: clamp(1.4rem, 6.2vw, 6.2rem);
+  font-size: clamp(1.25rem, 5.1vw, 5.6rem);
   line-height: .9; letter-spacing: -0.02em;
   margin: 0; text-transform: uppercase;
   pointer-events: auto;
@@ -168,7 +168,7 @@ h2 {
 .m { padding: 0; border: 0; background: none; cursor: zoom-in; position: relative; display: block; }
 .tl-pics { flex-wrap: wrap; }
 .m-vid::after, .tile-vid::after { content: none; }
-.play {
+.play-badge {
   position: absolute; inset: 0; display: grid; place-items: center; z-index: 3; pointer-events: none;
   color: #fff; font-size: 1.4rem; text-shadow: 0 2px 12px rgba(0,0,0,.8);
 }
