@@ -365,7 +365,7 @@ a.card { color: inherit; text-decoration: none; }
 
 /* contact */
 .contact { text-align: center; }
-.contact h2 { font-size: clamp(3rem, 14vw, 11rem); margin-bottom: 40px; }
+.contact h2 { font-size: clamp(1.8rem, 8.2vw, 7.5rem); margin-bottom: 40px; white-space: nowrap; }
 .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
 .links a {
   text-decoration: none; padding: 14px 22px; border: 1px solid var(--line); font-size: .78rem;
