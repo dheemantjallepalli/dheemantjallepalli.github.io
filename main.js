@@ -321,6 +321,66 @@ document.querySelectorAll(".card-media video").forEach((v) => {
   setInterval(() => { if (!paused && visible && !document.hidden) next(); }, 3400);
 })();
 
+// ---------- PR cards: animated halftone speed streaks ----------
+(() => {
+  const cards = [...document.querySelectorAll(".pb")];
+  if (!cards.length) return;
+  // longer races get longer streaks
+  const startAt = { 1278: 0.46, 2764: 0.36, 6380: 0.24 };
+  const items = cards.map((card, k) => {
+    const cv = document.createElement("canvas");
+    cv.className = "pb-dots";
+    cv.setAttribute("aria-hidden", "true");
+    card.prepend(cv);
+    return { card, cv, ctx: cv.getContext("2d"), start: startAt[card.dataset.time] ?? 0.35, seed: k * 1.7, visible: false };
+  });
+  const size = (it) => {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    it.W = it.cv.clientWidth; it.H = it.cv.clientHeight;
+    it.cv.width = it.W * dpr; it.cv.height = it.H * dpr;
+    it.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  const STEP = 7;
+  const draw = (it, t) => {
+    const { ctx, W, H, start, seed } = it;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#a8111b";
+    for (let py = STEP / 2; py < H; py += STEP) {
+      const w = py / H;
+      for (let px = STEP / 2; px < W; px += STEP) {
+        const u = px / W;
+        const ramp = Math.max(0, (u - start) / (1 - start));
+        if (!ramp) continue;
+        // wavy horizontal streaks, drifting slowly
+        const streak = 0.55 + 0.45 * Math.sin(w * Math.PI * 3.2 + seed + Math.sin(u * 4 + t * 0.6) * 0.6);
+        // pulses that race leftwards along the streaks
+        const rush = 0.78 + 0.22 * Math.sin(u * 22 + t * 7 + w * 3);
+        let r = Math.pow(ramp, 1.2) * streak * rush * (1 - 0.25 * Math.abs(w - 0.5));
+        r = Math.min(1, r) * STEP * 0.52;
+        if (r > 0.35) { ctx.beginPath(); ctx.arc(px, py, r, 0, 6.283); ctx.fill(); }
+      }
+    }
+  };
+  items.forEach(size);
+  addEventListener("resize", () => items.forEach((it) => { size(it); draw(it, performance.now() / 1000); }));
+  items.forEach((it) => draw(it, 0));
+  if (reduceMotion) return;
+  const obs = new IntersectionObserver((es) => es.forEach((e) => {
+    const it = items.find((i) => i.card === e.target);
+    if (it) it.visible = e.isIntersecting;
+  }));
+  items.forEach((it) => obs.observe(it.card));
+  let last = 0;
+  const loop = (now) => {
+    if (now - last > 33) { // ~30 fps is plenty for dots
+      last = now;
+      items.forEach((it) => { if (it.visible) draw(it, now / 1000); });
+    }
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+})();
+
 // ---------- Reveal on scroll ----------
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
