@@ -375,7 +375,7 @@ a.card { color: inherit; text-decoration: none; }
 .pb.in::before { width: 100%; }
 .pb:hover { border-color: var(--red); }
 .pb-dots { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-.pb > span { position: relative; z-index: 1; }
+.pb > span { position: relative; z-index: 1; text-shadow: 0 0 10px #0b0a0a, 0 0 4px #0b0a0a, 0 0 2px #0b0a0a; }
 .pb-dist { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 1.1rem; color: var(--muted); }
 .pb-time { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 600; color: var(--text); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
 .pb-pace { color: var(--red); }

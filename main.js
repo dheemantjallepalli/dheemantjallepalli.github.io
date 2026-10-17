@@ -325,14 +325,14 @@ document.querySelectorAll(".card-media video").forEach((v) => {
 (() => {
   const cards = [...document.querySelectorAll(".pb")];
   if (!cards.length) return;
-  // longer races get longer streaks
-  const startAt = { 1278: 0.46, 2764: 0.36, 6380: 0.24 };
+  // streaks span the whole card; longer races get slightly bolder dots
+  const boost = { 1278: 0.85, 2764: 0.92, 6380: 1 };
   const items = cards.map((card, k) => {
     const cv = document.createElement("canvas");
     cv.className = "pb-dots";
     cv.setAttribute("aria-hidden", "true");
     card.prepend(cv);
-    return { card, cv, ctx: cv.getContext("2d"), start: startAt[card.dataset.time] ?? 0.35, seed: k * 1.7, visible: false };
+    return { card, cv, ctx: cv.getContext("2d"), boost: boost[card.dataset.time] ?? 0.9, seed: k * 1.7, visible: false };
   });
   const size = (it) => {
     const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -342,22 +342,21 @@ document.querySelectorAll(".card-media video").forEach((v) => {
   };
   const STEP = 7;
   const draw = (it, t) => {
-    const { ctx, W, H, start, seed } = it;
+    const { ctx, W, H, boost, seed } = it;
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = "#a8111b";
     for (let py = STEP / 2; py < H; py += STEP) {
       const w = py / H;
       for (let px = STEP / 2; px < W; px += STEP) {
         const u = px / W;
-        const ramp = Math.max(0, (u - start) / (1 - start));
-        if (!ramp) continue;
+        const ramp = 0.4 + 0.6 * u; // small dots at the far left, growing to the right
         // wavy horizontal streaks, drifting slowly
         const streak = 0.55 + 0.45 * Math.sin(w * Math.PI * 3.2 + seed + Math.sin(u * 4 + t * 0.6) * 0.6);
-        // pulses that race leftwards along the streaks
-        const rush = 0.78 + 0.22 * Math.sin(u * 22 + t * 7 + w * 3);
-        let r = Math.pow(ramp, 1.2) * streak * rush * (1 - 0.25 * Math.abs(w - 0.5));
+        // pulses that race left → right along the streaks
+        const rush = 0.75 + 0.25 * Math.sin(u * 22 - t * 7 + w * 3);
+        let r = Math.pow(ramp, 1.2) * streak * rush * boost * (1 - 0.25 * Math.abs(w - 0.5));
         r = Math.min(1, r) * STEP * 0.52;
-        if (r > 0.35) { ctx.beginPath(); ctx.arc(px, py, r, 0, 6.283); ctx.fill(); }
+        if (r > 0.3) { ctx.beginPath(); ctx.arc(px, py, r, 0, 6.283); ctx.fill(); }
       }
     }
   };
