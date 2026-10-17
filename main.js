@@ -241,7 +241,6 @@ document.querySelectorAll(".filters button").forEach((btn) => {
   if (reduceMotion) return;
   const io = new IntersectionObserver((entries) => entries.forEach((e) => {
     const v = e.target;
-    v.classList.toggle("on-screen", e.isIntersecting);
     if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
   }), { threshold: 0.35 });
   vids.forEach((v) => io.observe(v));
