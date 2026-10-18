@@ -129,13 +129,12 @@ img, video { display: block; max-width: 100%; }
 .tag { color: var(--text); margin: 24px 0 0; font-size: clamp(.74rem, 1.7vw, .92rem); font-weight: 600; letter-spacing: .04em;
   text-shadow: 0 0 2px #000, 0 1px 4px #000, 0 2px 14px rgba(0,0,0,.95); }
 .cv-btn {
-  display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; pointer-events: auto;
-  padding: 12px 22px; background: var(--red); color: var(--text); text-decoration: none;
-  font-size: .82rem; font-weight: 600; letter-spacing: .08em; border: 1px solid var(--red);
-  transition: background .25s, color .25s;
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; pointer-events: auto;
+  padding: 6px 12px; background: transparent; color: var(--text); text-decoration: none;
+  font-size: .7rem; font-weight: 600; letter-spacing: .08em;
+  border: 1px solid rgba(243, 238, 234, .7); transition: background .25s, color .25s;
 }
-.cv-btn:hover { background: transparent; color: var(--text); }
-.cv-btn[hidden] { display: none; }
+.cv-btn:hover { background: var(--text); color: var(--bg); }
 /* role chips under the name: dark glass so they read over the photo */
 .roles { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; pointer-events: auto; }
 .roles li {
