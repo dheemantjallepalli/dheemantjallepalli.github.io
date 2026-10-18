@@ -127,6 +127,14 @@ img, video { display: block; max-width: 100%; }
 .name .w { display: inline-block; white-space: nowrap; }
 .name .ch, .contact h2 .ch { display: inline-block; transition: transform .25s ease-out, color .25s; }
 .tag { color: var(--muted); margin: 22px 0 0; font-size: clamp(.66rem, 1.6vw, .8rem); }
+.cv-btn {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; pointer-events: auto;
+  padding: 12px 22px; background: var(--red); color: var(--text); text-decoration: none;
+  font-size: .82rem; font-weight: 600; letter-spacing: .08em; border: 1px solid var(--red);
+  transition: background .25s, color .25s;
+}
+.cv-btn:hover { background: transparent; color: var(--text); }
+.cv-btn[hidden] { display: none; }
 /* role chips under the name: dark glass so they read over the photo */
 .roles { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; pointer-events: auto; }
 .roles li {
@@ -222,7 +230,7 @@ h2 {
   font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 95;
   text-transform: uppercase; font-size: clamp(1.2rem, 2.4vw, 1.7rem); line-height: 1.05; margin: 0 0 8px;
 }
-.tl-what { color: var(--red-ink); margin: 0 0 10px; }
+.tl-what { color: var(--red-ink); margin: 0 0 14px; }
 .tl-body > p:not(.tl-what) { color: #bdb3af; margin: 0; max-width: 60ch; }
 .tl-pics { display: flex; gap: 10px; margin-top: 18px; }
 .tl-pics img, .tl-pics .m img, .tl-pics .m video {
