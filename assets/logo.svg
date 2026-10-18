@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 1320">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" viewBox="0 0 1320 1320">
+  <title>DJ logo</title>
+  <!-- © 2026 Dheemant Jallepalli. All rights reserved. -->
+  <metadata>
+    <rdf:RDF><rdf:Description dc:title="DJ logo" dc:creator="Dheemant Jallepalli" dc:rights="© 2026 Dheemant Jallepalli. All rights reserved."/></rdf:RDF>
+  </metadata>
   <rect width="1320" height="1320" rx="240" fill="#0b0a0a"/>
   <g transform="translate(66 381) scale(0.9)" fill="none" stroke-width="44" stroke-linecap="butt" stroke-linejoin="miter">
     <path d="M434.75 128 H481.75 L345.25 492 H298.25 Z" fill="#a8111b" stroke="none"/>
