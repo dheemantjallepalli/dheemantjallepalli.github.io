@@ -384,13 +384,6 @@ document.querySelectorAll(".filters button").forEach((btn) => {
   requestAnimationFrame(loop);
 })();
 
-// ---------- Show the CV button only once the PDF is in place ----------
-(() => {
-  const btn = document.querySelector(".cv-btn");
-  if (!btn) return;
-  fetch(btn.getAttribute("href"), { method: "HEAD" }).then((r) => { if (r.ok) btn.hidden = false; }).catch(() => {});
-})();
-
 // ---------- Reveal on scroll ----------
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
