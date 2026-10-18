@@ -62,17 +62,21 @@ img, video { display: block; max-width: 100%; }
   position: fixed; top: 16px; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px var(--gutter);
-  background: linear-gradient(var(--bg) 30%, transparent);
+  background: rgba(11, 10, 10, .88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(243, 238, 234, .06);
 }
 .nav-mark { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.nav-mark svg { width: 64px; height: 22px; flex: none; }
+.nav-mark svg { width: 92px; height: 30px; flex: none; display: block; }
 .wordmark {
   font-family: var(--display); font-weight: 900; font-variation-settings: "wdth" 120;
   text-transform: uppercase; font-size: .95rem; letter-spacing: .02em; line-height: 1;
 }
-.nav-id { display: flex; flex-direction: column; gap: 5px; }
+.nav-id { display: flex; flex-direction: column; justify-content: center; gap: 6px; white-space: nowrap; }
 .role { font-family: var(--mono); font-size: .68rem; font-weight: 500; color: var(--red-ink); letter-spacing: .03em; line-height: 1; }
 .nav-mark { transition: opacity .2s; }
+/* keep the name block on one line; drop it before it would collide with the menu */
+@media (max-width: 1100px) { .role { display: none; } }
+@media (max-width: 960px) { .nav-id { display: none; } }
 .nav-mark:hover { opacity: .7; }
 .nav nav { display: flex; gap: clamp(12px, 2.5vw, 32px); }
 .nav nav a {
