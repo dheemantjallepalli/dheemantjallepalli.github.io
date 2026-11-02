@@ -330,7 +330,7 @@ document.querySelectorAll(".filters button").forEach((btn) => {
   const cards = [...document.querySelectorAll(".pb")];
   if (!cards.length) return;
   // streaks span the whole card; longer races get slightly bolder dots
-  const boost = { 1278: 0.85, 2764: 0.92, 6380: 1 };
+  const boost = { 1221: 0.85, 2764: 0.92, 6380: 1 };
   const items = cards.map((card, k) => {
     const cv = document.createElement("canvas");
     cv.className = "pb-dots";
